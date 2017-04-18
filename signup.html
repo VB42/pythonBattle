@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+
+    <script src="https://www.gstatic.com/firebasejs/3.7.5/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+
+    <script src = initFire.js></script>
+
+</head>
+<body>
+
+
+<div class="div">
+    <h2>Sign Up</h2>
+
+    <input id="first" name="first" placeholder="First Name">
+    <input id="last" name="last" placeholder="Last Name">
+    <input id="username" name="username" placeholder="Username">
+    <input type = "password" id="password" name="password" placeholder="Password">
+    <input type = "password" id="retype" name="password" placeholder="Retype Password">
+    <button id="signup" class="button" type="button">Create an Account</button>
+
+    <script src = initFirebase.js></script>
+
+</div>
+
+<style>
+    body {
+        background: #00e68a;
+    }
+    div {
+        margin: 0;
+        padding: 0;
+        font-family:"Futura";
+        background: white;
+        border-radius: 5px;
+        text-align: center;
+    }
+    div {
+        width: 450px;
+        overflow: hidden;
+        margin: auto;
+        margin-top: 150px;
+        padding: 20px;
+    }
+    .div input {
+        width: 400px;
+        height: 35px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        padding: 2px;
+        background: #ffffff;
+    }
+    button {
+        background-color: transparent;
+        border-color:black;
+        font-family:"Futura";
+        font-size: 20px;
+        width: 200px;
+        height: 30px;
+        border-radius: 5px;
+    }
+    .div button:hover {
+        background-color: #00cfe6;
+    }
+</style>
+</body>
+</html>

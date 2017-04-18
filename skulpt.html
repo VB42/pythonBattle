@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://www.skulpt.org/static/skulpt.min.js"></script>
+    <script src="http://www.skulpt.org/static/skulpt-stdlib.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/3.7.5/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+
+    <script src="https://apis.google.com/js/api.js"></script>
+
+
+    <script src = initFire.js></script>
+    <script src = challenges.js></script>
+
+
+
+
+</head>
+
+<body style = "background: #00e68a">
+
+<script>
+    // output functions are configurable.  This one just appends some text
+    // to a pre element.
+
+
+
+    function outf(text) {
+        var mypre = document.getElementById("output");
+        //console.log("pre: " + mypre.innerHTML);
+        //console.log("text: " + text)
+        mypre.innerHTML = mypre.innerHTML + text;
+    }
+    function builtinRead(x) {
+        if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+            throw "File not found: '" + x + "'";
+        return Sk.builtinFiles["files"][x];
+    }
+    // Here's everything you need to run a python program in skulpt
+    // grab the code from your textarea
+    // get a reference to your pre element for output
+    // configure the output function
+    // call Sk.importMainWithBody()
+    function runit() {
+        var prog = document.getElementById("yourcode").value;//gets values of your code
+        var mypre = document.getElementById("output");//ref to the output
+        mypre.innerHTML = '';//replaces the output to blank
+        Sk.pre = "output";
+        Sk.configure({output:outf, read:builtinRead});
+        //(Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'mycanvas';
+        var myPromise = Sk.misceval.asyncToPromise(function() {
+            return Sk.importMainWithBody("<stdin>", false, prog, true);
+        });
+        myPromise.then(function(mod) {
+                //console.log('success');
+                document.getElementById("error").innerHTML = "";
+            },
+            function(err) {
+                // console.log(err.toString());
+                document.getElementById("error").innerHTML = err.toString();
+                document.getElementById("output").innerHTML = " ";
+            });
+
+    }
+
+
+</script>
+
+<h4 style = "text-align: right; margin-right: 10px" class = "text-primary" id = "displayUserName"></h4>
+<h5 style = "text-align: right; margin-right: 10px" class = "text-primary" id = "displayPoints"></h5>
+<br><button class = "btn btn-primary" style = "text-align: right; margin-right: 10px; position: absolute; right: 0" id = "logout">Log out</button>
+<script src = "initFirebase.js"></script>
+
+<h3 style = "text-align: center" class="text-primary lead" id = "problemName">Find an opponent to get started!</h3>
+
+<form style="text-align: center">
+<textarea onkeydown="if(event.keyCode===9)
+{var v=this.value,s=this.selectionStart,e=this.selectionEnd;
+this.value=v.substring(0, s)+'\t'+v.substring(e);
+this.selectionStart=this.selectionEnd=s+1;
+return false;}" id="yourcode" style = "justify-content: center; border-radius: 15px; margin: auto" cols="40" rows="10">print "Hello World"
+</textarea><br />
+    <button id="pythonButton" style="text-align: center; margin-top: 25px; margin-bottom: 25px" type="button" class="btn btn-primary btn-lg" onclick="runit(); checkSuccess()"><p class = "glyphicon glyphicon-ok"></p></button>
+</form>
+<h4 style = "text-align: center">Output:</h4>
+<h3 id="output" style = "text-align: center"></h3>
+<!-- If you want turtle graphics include a canvas -->
+<!--<div id="mycanvas"></div> -->
+
+<h2 id = "error" style = "text-align: center"></h2>
+
+
+
+
+<br><button class = "btn btn-primary center-block" style = "justify-content: center" id = "findOpponent" onclick="findOpponent()">Find Opponent</button>
+
+<h3 style = "text-align: center" class="text-primary lead" id = "opponentInfo"></h3>
+
+
+<script src = getUsers.js></script>
+
+
+</body>
+
+</html>
