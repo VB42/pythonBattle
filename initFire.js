@@ -3,12 +3,12 @@
  */
 (function() {
     var config = {
-        apiKey: "AIzaSyATGVaigvukZGeRY13DHRA0SbMFUhi_aAw",
-        authDomain: "pythonweb-859fe.firebaseapp.com",
-        databaseURL: "https://pythonweb-859fe.firebaseio.com",
-        projectId: "pythonweb-859fe",
-        storageBucket: "pythonweb-859fe.appspot.com",
-        messagingSenderId: "933948078988"
+        apiKey: "************",
+        authDomain: "************",
+        databaseURL: ""************",",
+        projectId: ""************",",
+        storageBucket: ""************",",
+        messagingSenderId: ""************","
     };
     firebase.initializeApp(config);
 }());
